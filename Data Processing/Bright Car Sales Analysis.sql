@@ -105,7 +105,7 @@ FROM `bright_car_sales`.`car_sales_analysis`.`car_sales_dataset`
 GROUP BY year;
 -- 2013 cars have the highest selling price
 
--- Price per make
+-- Price per model
 SELECT make,
         SUM(sellingprice) AS price_per_make
 FROM `bright_car_sales`.`car_sales_analysis`.`car_sales_dataset`
@@ -193,19 +193,15 @@ GROUP BY seller;
 
 --              B) Data Processing
 
-SELECT year,
-        make,
-        model,
-        body,
-        transmission,
-        state,
-        color,
-        interior,
-        seller,
-        unitssold,
-        condition,
-        
-        -- Replacing NULL values with zero in 3 columns
+SELECT IFNULL(year, 'Not Specified') AS year_clean,
+        IFNULL(make, 'Not Specified') AS make_clean,
+        IFNULL(transmission, 'Not Specified') AS transmission_clean,
+        IFNULL(state, 'Not Specified') AS state_clean,
+        IFNULL(color, 'Not Specified') AS color_clean,
+        IFNULL(interior, 'Not Specified') AS interior_clean,
+        IFNULL(seller, 'Not Specified') AS seller_clean,
+        IFNULL(unitssold, 0) AS unitssold_clean,
+        IFNULL(condition, 0) AS condition_clean,
         IFNULL(odometer, 0) AS clean_odometer,
         IFNULL(sellingprice, 0) AS clean_selling_price,
         IFNULL(mmr, 0) AS clean_mmr,
